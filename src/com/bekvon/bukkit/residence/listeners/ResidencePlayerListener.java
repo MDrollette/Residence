@@ -68,10 +68,10 @@ public class ResidencePlayerListener implements Listener {
         playerToggleChat = new ArrayList<String>();
         minUpdateTime = Residence.getConfigManager().getMinMoveUpdateInterval();
         chatenabled = Residence.getConfigManager().chatEnabled();
-        Player[] players = Residence.getServ()._INVALID_getOnlinePlayers();
-        for (Player player : players) {
+
+        Residence.getServ().getOnlinePlayers().forEach(player -> {
             lastUpdate.put(player.getName(), System.currentTimeMillis());
-        }
+        });
     }
 
     public void reload() {
@@ -81,10 +81,9 @@ public class ResidencePlayerListener implements Listener {
         playerToggleChat = new ArrayList<String>();
         minUpdateTime = Residence.getConfigManager().getMinMoveUpdateInterval();
         chatenabled = Residence.getConfigManager().chatEnabled();
-        Player[] players = Residence.getServ()._INVALID_getOnlinePlayers();
-        for (Player player : players) {
+        Residence.getServ().getOnlinePlayers().forEach(player -> {
             lastUpdate.put(player.getName(), System.currentTimeMillis());
-        }
+        });
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -571,21 +570,20 @@ public class ResidencePlayerListener implements Listener {
 
     public void doHeals() {
         try {
-            Player[] p = Residence.getServ()._INVALID_getOnlinePlayers();
-            for (Player player : p) {
+            Residence.getServ().getOnlinePlayers().forEach(player -> {
                 String resname = Residence.getPlayerListener().getCurrentResidenceName(player.getName());
                 ClaimedResidence res = null;
                 if (resname != null) {
                     res = Residence.getResidenceManager().getByName(resname);
                 }
                 if (res != null && res.getPermissions().has("healing", false)) {
-                	Damageable damage = player;
-                	double health = damage.getHealth();
+                    Damageable damage = player;
+                    double health = damage.getHealth();
                     if (health < 20 && !player.isDead()) {
                         player.setHealth(health + 1);
                     }
                 }
-            }
+            });
         } catch (Exception ex) {
         }
     }

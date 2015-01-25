@@ -338,12 +338,11 @@ public class Residence extends JavaPlugin {
                 rentint = rentint * 60 * 20;
                 rentBukkitId = server.getScheduler().scheduleSyncRepeatingTask(this, rentExpire, rentint, rentint);
             }
-            Player[] players = getServer()._INVALID_getOnlinePlayers();
-            for (Player player : players) {
+            getServer().getOnlinePlayers().forEach(player -> {
                 if (Residence.getPermissionManager().isResidenceAdmin(player)) {
                     turnResAdminOn(player);
                 }
-            }
+            });
 //            try {
 //                Metrics metrics = new Metrics(this);
 //                metrics.start();

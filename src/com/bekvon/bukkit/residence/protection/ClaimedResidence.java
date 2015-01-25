@@ -963,12 +963,11 @@ public class ClaimedResidence {
 
     public ArrayList<Player> getPlayersInResidence() {
         ArrayList<Player> within = new ArrayList<Player>();
-        Player[] players = Residence.getServ()._INVALID_getOnlinePlayers();
-        for (Player player : players) {
+        Residence.getServ().getOnlinePlayers().forEach(player -> {
             if (this.containsLoc(player.getLocation())) {
                 within.add(player);
             }
-        }
+        });
         return within;
     }
 }
