@@ -61,7 +61,7 @@ import com.bekvon.bukkit.residence.text.help.HelpEntry;
 import com.bekvon.bukkit.residence.text.help.InformationPager;
 import com.bekvon.bukkit.residence.vaultinterface.ResidenceVaultAdapter;
 import com.earth2me.essentials.Essentials;
-import com.residence.mcstats.Metrics;
+//import com.residence.mcstats.Metrics;
 import com.residence.zip.ZipLibrary;
 
 import cosine.boseconomy.BOSEconomy;
@@ -344,12 +344,12 @@ public class Residence extends JavaPlugin {
                     turnResAdminOn(player);
                 }
             }
-            try {
-                Metrics metrics = new Metrics(this);
-                metrics.start();
-            } catch (IOException e) {
-                // Failed to submit the stats :-(
-            }
+//            try {
+//                Metrics metrics = new Metrics(this);
+//                metrics.start();
+//            } catch (IOException e) {
+//                // Failed to submit the stats :-(
+//            }
             Logger.getLogger("Minecraft").log(Level.INFO, "[Residence] Enabled! Version " + this.getDescription().getVersion() + " by bekvon");
             initsuccess = true;
         } catch (Exception ex) {
