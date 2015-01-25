@@ -78,17 +78,17 @@ public class ResidenceEntityListener implements Listener {
 //        }
 //    }
     
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onEntityInteract(EntityInteractEvent event){
-    	Block block = event.getBlock();
-    	Material mat = block.getType();
-    	Entity entity = event.getEntity();    	
-    	FlagPermissions perms = Residence.getPermsByLoc(block.getLocation());
-    	boolean hastrample = perms.has("trample", perms.has("hasbuild", true));     			
-    	if(!hastrample && !(entity.getType() == EntityType.FALLING_BLOCK) && (mat == Material.SOIL || mat == Material.SOUL_SAND)){
-    		event.setCancelled(true);
-    	}
-    }
+//    @EventHandler(priority = EventPriority.LOWEST)
+//    public void onEntityInteract(EntityInteractEvent event){
+//    	Block block = event.getBlock();
+//    	Material mat = block.getType();
+//    	Entity entity = event.getEntity();
+//    	FlagPermissions perms = Residence.getPermsByLoc(block.getLocation());
+//    	boolean hastrample = perms.has("trample", perms.has("hasbuild", true));
+//    	if(!hastrample && !(entity.getType() == EntityType.FALLING_BLOCK) && (mat == Material.SOIL || mat == Material.SOUL_SAND)){
+//    		event.setCancelled(true);
+//    	}
+//    }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onCreatureSpawn(CreatureSpawnEvent event) {
