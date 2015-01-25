@@ -649,16 +649,16 @@ public class ResidenceCommandListener extends Residence {
                 }
                 smanager.modify(player, false, amount);
                 return true;
-            } else if (args[1].equals("shift")) {
-                int amount;
-                try {
-                    amount = Integer.parseInt(args[2]);
-                } catch (Exception ex) {
-                    player.sendMessage(ChatColor.RED + language.getPhrase("InvalidAmount"));
-                    return true;
-                }
-                smanager.modify(player, true, amount);
-                return true;
+//            } else if (args[1].equals("shift")) {
+//                int amount;
+//                try {
+//                    amount = Integer.parseInt(args[2]);
+//                } catch (Exception ex) {
+//                    player.sendMessage(ChatColor.RED + language.getPhrase("InvalidAmount"));
+//                    return true;
+//                }
+//                smanager.modify(player, true, amount);
+//                return true;
             }
         }
         if (args.length > 1 && args[1].equals("residence")) {
