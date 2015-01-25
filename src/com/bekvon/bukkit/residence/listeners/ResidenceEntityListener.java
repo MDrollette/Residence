@@ -62,21 +62,21 @@ import org.bukkit.event.hanging.HangingPlaceEvent;
  */
 public class ResidenceEntityListener implements Listener {
     
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onEndermanChangeBlock(EntityChangeBlockEvent event) {
-        if (event.getEntityType() != EntityType.ENDERMAN && event.getEntityType() != EntityType.WITHER) {
-            return;
-        }
-        FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
-        FlagPermissions world = Residence.getWorldFlags().getPerms(event.getBlock().getWorld().getName());
-        if (event.getEntityType() == EntityType.WITHER) {
-            if (!perms.has("wither", perms.has("explode", world.has("wither", world.has("explode", true))))) {
-                event.setCancelled(true);
-            }
-        } else if (!perms.has("build", true)) {
-            event.setCancelled(true);
-        }
-    }
+//    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+//    public void onEndermanChangeBlock(EntityChangeBlockEvent event) {
+//        if (event.getEntityType() != EntityType.ENDERMAN && event.getEntityType() != EntityType.WITHER) {
+//            return;
+//        }
+//        FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
+//        FlagPermissions world = Residence.getWorldFlags().getPerms(event.getBlock().getWorld().getName());
+//        if (event.getEntityType() == EntityType.WITHER) {
+//            if (!perms.has("wither", perms.has("explode", world.has("wither", world.has("explode", true))))) {
+//                event.setCancelled(true);
+//            }
+//        } else if (!perms.has("build", true)) {
+//            event.setCancelled(true);
+//        }
+//    }
     
     @EventHandler(priority = EventPriority.LOWEST)
     public void onEntityInteract(EntityInteractEvent event){
