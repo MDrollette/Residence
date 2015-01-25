@@ -23,6 +23,9 @@ import java.util.Set;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 
 /**
  * 
@@ -704,8 +707,19 @@ public class ClaimedResidence {
             ResidenceTPEvent tpevent = new ResidenceTPEvent(this, tpLoc, targetPlayer, reqPlayer);
             Residence.getServ().getPluginManager().callEvent(tpevent);
             if (!tpevent.isCancelled()) {
-                targetPlayer.teleport(tpLoc);
-                targetPlayer.sendMessage(ChatColor.GREEN + Residence.getLanguage().getPhrase("TeleportSuccess"));
+                // find a safe teleport location at the tpset point
+                Block target = tpLoc.getBlock();
+                while(target.getRelative(BlockFace.DOWN).isEmpty()) {
+                    target = target.getRelative(BlockFace.DOWN);
+                }
+                Material targetMaterial = target.getRelative(BlockFace.DOWN).getType();
+                if(targetMaterial != Material.LAVA && targetMaterial != Material.STATIONARY_LAVA) {
+                    targetPlayer.teleport(target.getLocation());
+                    targetPlayer.sendMessage(ChatColor.GREEN + Residence.getLanguage().getPhrase("TeleportSuccess"));
+                } else {
+                    tpevent.setCancelled(true);
+                    targetPlayer.sendMessage(ChatColor.RED + "Unable to find a safe location to teleport");
+                }
             }
         } else {
             CuboidArea area = areas.values().iterator().next();
