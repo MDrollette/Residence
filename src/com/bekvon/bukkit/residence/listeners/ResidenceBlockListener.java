@@ -122,41 +122,41 @@ public class ResidenceBlockListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onBlockPistonRetract(BlockPistonRetractEvent event) {
-        FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
-        if (!perms.has("piston", true)){
-            event.setCancelled(true);
-        	return;
-    	}
-        if (event.isSticky()){
-            Location location = event.getRetractLocation();
-            FlagPermissions blockperms = Residence.getPermsByLoc(location);
-            if (!blockperms.has("piston", true)) {
-            	event.setCancelled(true);
-            }
-        }
-    }
+//    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+//    public void onBlockPistonRetract(BlockPistonRetractEvent event) {
+//        FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
+//        if (!perms.has("piston", true)){
+//            event.setCancelled(true);
+//        	return;
+//    	}
+//        if (event.isSticky()){
+//            Location location = event.getRetractLocation();
+//            FlagPermissions blockperms = Residence.getPermsByLoc(location);
+//            if (!blockperms.has("piston", true)) {
+//            	event.setCancelled(true);
+//            }
+//        }
+//    }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onBlockPistonExtend(BlockPistonExtendEvent event) {
-        FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
-        if (!perms.has("piston", true)) {
-            event.setCancelled(true);
-        }
-        for (Block block : event.getBlocks()) {
-        	FlagPermissions blockpermsfrom = Residence.getPermsByLoc(block.getLocation());
-        	Location blockto = block.getLocation();
-        	blockto.setX(blockto.getX()+event.getDirection().getModX());
-        	blockto.setY(blockto.getY()+event.getDirection().getModY());
-        	blockto.setZ(blockto.getZ()+event.getDirection().getModZ());
-        	FlagPermissions blockpermsto = Residence.getPermsByLoc(blockto);
-            if (!blockpermsfrom.has("piston", true) || !blockpermsto.has("piston", true)) {
-            	event.setCancelled(true);
-            	return;
-            }
-        }
-    }
+//    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+//    public void onBlockPistonExtend(BlockPistonExtendEvent event) {
+//        FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
+//        if (!perms.has("piston", true)) {
+//            event.setCancelled(true);
+//        }
+//        for (Block block : event.getBlocks()) {
+//        	FlagPermissions blockpermsfrom = Residence.getPermsByLoc(block.getLocation());
+//        	Location blockto = block.getLocation();
+//        	blockto.setX(blockto.getX()+event.getDirection().getModX());
+//        	blockto.setY(blockto.getY()+event.getDirection().getModY());
+//        	blockto.setZ(blockto.getZ()+event.getDirection().getModZ());
+//        	FlagPermissions blockpermsto = Residence.getPermsByLoc(blockto);
+//            if (!blockpermsfrom.has("piston", true) || !blockpermsto.has("piston", true)) {
+//            	event.setCancelled(true);
+//            	return;
+//            }
+//        }
+//    }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onBlockFromTo(BlockFromToEvent event) {
