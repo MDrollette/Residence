@@ -113,14 +113,14 @@ public class ResidenceBlockListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onBlockSpread(BlockSpreadEvent event) {
-        Location loc = event.getBlock().getLocation();
-        FlagPermissions perms = Residence.getPermsByLoc(loc);
-        if (!perms.has("spread", true)) {
-            event.setCancelled(true);
-        }
-    }
+//    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+//    public void onBlockSpread(BlockSpreadEvent event) {
+//        Location loc = event.getBlock().getLocation();
+//        FlagPermissions perms = Residence.getPermsByLoc(loc);
+//        if (!perms.has("spread", true)) {
+//            event.setCancelled(true);
+//        }
+//    }
 
 //    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 //    public void onBlockPistonRetract(BlockPistonRetractEvent event) {
