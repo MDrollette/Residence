@@ -148,93 +148,93 @@ public class ResidenceEntityListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onExplosionPrime(ExplosionPrimeEvent event) {
-        EntityType entity = event.getEntityType();
-        FlagPermissions perms = Residence.getPermsByLoc(event.getEntity().getLocation());
-        if (entity == EntityType.CREEPER) {
-            if (!perms.has("creeper", perms.has("explode", true))) {
-                event.setCancelled(true);
-                event.getEntity().remove();
-            }
-        }
-        if (entity == EntityType.PRIMED_TNT || entity == EntityType.MINECART_TNT) {
-            if (!perms.has("tnt", perms.has("explode", true))) {
-                event.setCancelled(true);
-                event.getEntity().remove();
-            }
-        }
-        if (entity == EntityType.FIREBALL) {
-            if (!perms.has("fireball", perms.has("explode", true))) {
-                event.setCancelled(true);
-                event.getEntity().remove();
-            }
-        }
-        if (entity == EntityType.SMALL_FIREBALL) {
-            if (!perms.has("fireball", perms.has("explode", true))) {
-                event.setCancelled(true);
-                event.getEntity().remove();
-            }
-        }
-        if (entity == EntityType.WITHER_SKULL) {
-            if (!perms.has("witherdamage", perms.has("damage", true))) {
-                event.setCancelled(true);
-                event.getEntity().remove();
-            }
-        }
-    }
+//    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+//    public void onExplosionPrime(ExplosionPrimeEvent event) {
+//        EntityType entity = event.getEntityType();
+//        FlagPermissions perms = Residence.getPermsByLoc(event.getEntity().getLocation());
+//        if (entity == EntityType.CREEPER) {
+//            if (!perms.has("creeper", perms.has("explode", true))) {
+//                event.setCancelled(true);
+//                event.getEntity().remove();
+//            }
+//        }
+//        if (entity == EntityType.PRIMED_TNT || entity == EntityType.MINECART_TNT) {
+//            if (!perms.has("tnt", perms.has("explode", true))) {
+//                event.setCancelled(true);
+//                event.getEntity().remove();
+//            }
+//        }
+//        if (entity == EntityType.FIREBALL) {
+//            if (!perms.has("fireball", perms.has("explode", true))) {
+//                event.setCancelled(true);
+//                event.getEntity().remove();
+//            }
+//        }
+//        if (entity == EntityType.SMALL_FIREBALL) {
+//            if (!perms.has("fireball", perms.has("explode", true))) {
+//                event.setCancelled(true);
+//                event.getEntity().remove();
+//            }
+//        }
+//        if (entity == EntityType.WITHER_SKULL) {
+//            if (!perms.has("witherdamage", perms.has("damage", true))) {
+//                event.setCancelled(true);
+//                event.getEntity().remove();
+//            }
+//        }
+//    }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onEntityExplode(EntityExplodeEvent event) {
-        if (event.isCancelled() || event.getEntity() == null)
-            return;
-        Boolean cancel = false;
-        EntityType entity = event.getEntityType();
-        FlagPermissions perms = Residence.getPermsByLoc(event.getEntity().getLocation());
-        FlagPermissions world = Residence.getWorldFlags().getPerms(event.getEntity().getWorld().getName());
-        if (entity == EntityType.CREEPER) {
-            if (!perms.has("creeper", perms.has("explode", true))) {
-                cancel = true;
-            }
-        }
-        if (entity == EntityType.PRIMED_TNT || entity == EntityType.MINECART_TNT) {
-            if (!perms.has("tnt", perms.has("explode", true))) {
-                cancel = true;
-            }
-        }
-        if (entity == EntityType.FIREBALL) {
-            if (!perms.has("fireball", perms.has("explode", true))) {
-                cancel = true;
-            }
-        }
-        if (entity == EntityType.SMALL_FIREBALL) {
-            if (!perms.has("fireball", perms.has("explode", true))) {
-                cancel = true;
-            }
-        }
-        if (entity == EntityType.WITHER_SKULL || entity == EntityType.WITHER) {
-            if (!perms.has("wither", perms.has("explode", world.has("wither", world.has("explode", true))))) {
-                cancel = true;
-            }
-        }
-        if (cancel) {
-            event.setCancelled(true);
-            event.getEntity().remove();
-        } else {
-            List<Block> preserve = new ArrayList<Block>();
-            for (Block block : event.blockList()) {
-                FlagPermissions blockperms = Residence.getPermsByLoc(block.getLocation());
-                if ((!blockperms.has("wither", blockperms.has("explode", world.has("wither", world.has("explode", true)))) && (entity == EntityType.WITHER || entity == EntityType.WITHER_SKULL) || (!blockperms.has("fireball", blockperms.has("explode", true)) && (entity == EntityType.FIREBALL || entity == EntityType.SMALL_FIREBALL)) || (!blockperms.has("tnt", blockperms.has("explode", true)) && (entity == EntityType.PRIMED_TNT || entity == EntityType.MINECART_TNT)) || (!blockperms.has("creeper", blockperms.has("explode", true)) && entity == EntityType.CREEPER))) {
-                    if (block != null) {
-                        preserve.add(block);
-                    }
-                }
-            }
-            for (Block block : preserve) {
-                event.blockList().remove(block);
-            }
-        }
-    }
+//    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+//    public void onEntityExplode(EntityExplodeEvent event) {
+//        if (event.isCancelled() || event.getEntity() == null)
+//            return;
+//        Boolean cancel = false;
+//        EntityType entity = event.getEntityType();
+//        FlagPermissions perms = Residence.getPermsByLoc(event.getEntity().getLocation());
+//        FlagPermissions world = Residence.getWorldFlags().getPerms(event.getEntity().getWorld().getName());
+//        if (entity == EntityType.CREEPER) {
+//            if (!perms.has("creeper", perms.has("explode", true))) {
+//                cancel = true;
+//            }
+//        }
+//        if (entity == EntityType.PRIMED_TNT || entity == EntityType.MINECART_TNT) {
+//            if (!perms.has("tnt", perms.has("explode", true))) {
+//                cancel = true;
+//            }
+//        }
+//        if (entity == EntityType.FIREBALL) {
+//            if (!perms.has("fireball", perms.has("explode", true))) {
+//                cancel = true;
+//            }
+//        }
+//        if (entity == EntityType.SMALL_FIREBALL) {
+//            if (!perms.has("fireball", perms.has("explode", true))) {
+//                cancel = true;
+//            }
+//        }
+//        if (entity == EntityType.WITHER_SKULL || entity == EntityType.WITHER) {
+//            if (!perms.has("wither", perms.has("explode", world.has("wither", world.has("explode", true))))) {
+//                cancel = true;
+//            }
+//        }
+//        if (cancel) {
+//            event.setCancelled(true);
+//            event.getEntity().remove();
+//        } else {
+//            List<Block> preserve = new ArrayList<Block>();
+//            for (Block block : event.blockList()) {
+//                FlagPermissions blockperms = Residence.getPermsByLoc(block.getLocation());
+//                if ((!blockperms.has("wither", blockperms.has("explode", world.has("wither", world.has("explode", true)))) && (entity == EntityType.WITHER || entity == EntityType.WITHER_SKULL) || (!blockperms.has("fireball", blockperms.has("explode", true)) && (entity == EntityType.FIREBALL || entity == EntityType.SMALL_FIREBALL)) || (!blockperms.has("tnt", blockperms.has("explode", true)) && (entity == EntityType.PRIMED_TNT || entity == EntityType.MINECART_TNT)) || (!blockperms.has("creeper", blockperms.has("explode", true)) && entity == EntityType.CREEPER))) {
+//                    if (block != null) {
+//                        preserve.add(block);
+//                    }
+//                }
+//            }
+//            for (Block block : preserve) {
+//                event.blockList().remove(block);
+//            }
+//        }
+//    }
     
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onSplashPotion(PotionSplashEvent event) {
