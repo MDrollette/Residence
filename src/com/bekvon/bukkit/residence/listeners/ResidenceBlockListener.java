@@ -158,28 +158,28 @@ public class ResidenceBlockListener implements Listener {
 //        }
 //    }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onBlockFromTo(BlockFromToEvent event) {
-        FlagPermissions perms = Residence.getPermsByLoc(event.getToBlock().getLocation());
-        boolean hasflow = perms.has("flow", true);
-        Material mat = event.getBlock().getType();
-        if (!hasflow) {
-            event.setCancelled(true);
-            return;
-        }
-        if (mat == Material.LAVA || mat == Material.STATIONARY_LAVA) {
-            if (!perms.has("lavaflow", hasflow)) {
-        		event.setCancelled(true);
-        	}
-            return;
-        }
-        if (mat == Material.WATER || mat == Material.STATIONARY_WATER) {
-        	if (!perms.has("waterflow", hasflow)) {
-        		event.setCancelled(true);
-        	}
-            return;
-        }
-    }
+//    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+//    public void onBlockFromTo(BlockFromToEvent event) {
+//        FlagPermissions perms = Residence.getPermsByLoc(event.getToBlock().getLocation());
+//        boolean hasflow = perms.has("flow", true);
+//        Material mat = event.getBlock().getType();
+//        if (!hasflow) {
+//            event.setCancelled(true);
+//            return;
+//        }
+//        if (mat == Material.LAVA || mat == Material.STATIONARY_LAVA) {
+//            if (!perms.has("lavaflow", hasflow)) {
+//        		event.setCancelled(true);
+//        	}
+//            return;
+//        }
+//        if (mat == Material.WATER || mat == Material.STATIONARY_WATER) {
+//        	if (!perms.has("waterflow", hasflow)) {
+//        		event.setCancelled(true);
+//        	}
+//            return;
+//        }
+//    }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onBlockBurn(BlockBurnEvent event) {
