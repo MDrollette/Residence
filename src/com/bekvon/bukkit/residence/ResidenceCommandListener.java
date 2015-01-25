@@ -30,6 +30,9 @@ import java.util.List;
 public class ResidenceCommandListener extends Residence {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        for(int i=0; i < args.length; i++) {
+            args[i] = args[i].toLowerCase();
+        }
         ResidenceCommandEvent cevent = new ResidenceCommandEvent(command.getName(), args, sender);
         server.getPluginManager().callEvent(cevent);
         if (cevent.isCancelled()) {
