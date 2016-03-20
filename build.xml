@@ -7,7 +7,7 @@
 	<path id="classpath">
 		<fileset dir="lib" includes="**/*.jar" />
 	</path>
-	<target name="main" depends="prep, class, compile, jar, clean" description="Main target">
+	<target name="main" depends="prep, compile, jar, clean" description="Main target">
 		<echo>Building the .jar file.</echo>
 	</target>
 
@@ -64,13 +64,13 @@
 	<!-- compile -->
 	<target name="compile" description="Compile Residence source">
 		<echo>Compiling</echo>
-		<javac target="1.6" source="1.6" srcdir="src/com/" destdir="build" debug="true" debuglevel="lines,vars,source" classpathref="classpath" includeantruntime="false">
+		<javac target="1.8" source="1.8" srcdir="src/com/" destdir="build" debug="true" debuglevel="lines,vars,source" classpathref="classpath" includeantruntime="false">
 			<compilerarg value="-Xbootclasspath/p:${toString:classpath}" />
 		</javac>
 		<copy file="src/plugin.yml" tofile="build/plugin.yml" />
 		<copy file="src/config.yml" tofile="build/config.yml" />
-		<copy todir="build/languagefiles">
-			<fileset dir="src/languagefiles" />
+		<copy todir="build/Language">
+			<fileset dir="src/Language" />
 		</copy>
 	</target>
 

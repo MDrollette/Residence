@@ -956,16 +956,16 @@ public class ResidencePlayerListener implements Listener {
 	if (res.getPermissions().has("keepexp", false))
 	    event.setKeepLevel(true);
 
-	if (res.getPermissions().has("respawn", false) && Bukkit.getVersion().toString().contains("Spigot"))
-	    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-		public void run() {
-		    try {
-			event.getEntity().spigot().respawn();
-		    } catch (Exception e) {
-		    }
-		    return;
-		}
-	    }, 1L);
+//	if (res.getPermissions().has("respawn", false) && Bukkit.getVersion().toString().contains("Spigot"))
+//	    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+//		public void run() {
+//		    try {
+//			event.getEntity().spigot().respawn();
+//		    } catch (Exception e) {
+//		    }
+//		    return;
+//		}
+//	    }, 1L);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
