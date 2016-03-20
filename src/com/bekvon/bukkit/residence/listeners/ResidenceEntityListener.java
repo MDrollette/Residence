@@ -420,190 +420,190 @@ public class ResidenceEntityListener implements Listener {
 	}
     }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onExplosionPrime(ExplosionPrimeEvent event) {
-	// disabling event on world
-	if (Residence.isDisabledWorldListener(event.getEntity().getWorld()))
-	    return;
-	EntityType entity = event.getEntityType();
-	FlagPermissions perms = Residence.getPermsByLoc(event.getEntity().getLocation());
+ //    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+ //    public void onExplosionPrime(ExplosionPrimeEvent event) {
+	// // disabling event on world
+	// if (Residence.isDisabledWorldListener(event.getEntity().getWorld()))
+	//     return;
+	// EntityType entity = event.getEntityType();
+	// FlagPermissions perms = Residence.getPermsByLoc(event.getEntity().getLocation());
 
-	switch (entity) {
-	case CREEPER:
-	    if (!perms.has("creeper", perms.has("explode", true))) {
-		if (Residence.getConfigManager().isCreeperExplodeBelow()) {
-		    if (event.getEntity().getLocation().getBlockY() >= Residence.getConfigManager().getCreeperExplodeBelowLevel()) {
-			event.setCancelled(true);
-			event.getEntity().remove();
-		    } else {
-			ClaimedResidence res = Residence.getResidenceManager().getByLoc(event.getEntity().getLocation());
-			if (res != null) {
-			    event.setCancelled(true);
-			    event.getEntity().remove();
-			}
-		    }
-		} else {
-		    event.setCancelled(true);
-		    event.getEntity().remove();
-		}
-	    }
-	    break;
-	case PRIMED_TNT:
-	case MINECART_TNT:
-	    if (!perms.has("tnt", perms.has("explode", true))) {
-		if (Residence.getConfigManager().isTNTExplodeBelow()) {
-		    if (event.getEntity().getLocation().getBlockY() >= Residence.getConfigManager().getTNTExplodeBelowLevel()) {
-			event.setCancelled(true);
-			event.getEntity().remove();
-		    } else {
-			ClaimedResidence res = Residence.getResidenceManager().getByLoc(event.getEntity().getLocation());
-			if (res != null) {
-			    event.setCancelled(true);
-			    event.getEntity().remove();
-			}
-		    }
-		} else {
-		    event.setCancelled(true);
-		    event.getEntity().remove();
-		}
-	    }
-	    break;
-	case SMALL_FIREBALL:
-	case FIREBALL:
-	    if (!perms.has("fireball", perms.has("explode", true))) {
-		event.setCancelled(true);
-		event.getEntity().remove();
-	    }
-	    break;
-	case WITHER_SKULL:
-	    if (!perms.has("witherdamage", perms.has("damage", true))) {
-		event.setCancelled(true);
-		event.getEntity().remove();
-	    }
-	    break;
-	default:
-	    break;
-	}
-    }
+	// switch (entity) {
+	// case CREEPER:
+	//     if (!perms.has("creeper", perms.has("explode", true))) {
+	// 	if (Residence.getConfigManager().isCreeperExplodeBelow()) {
+	// 	    if (event.getEntity().getLocation().getBlockY() >= Residence.getConfigManager().getCreeperExplodeBelowLevel()) {
+	// 		event.setCancelled(true);
+	// 		event.getEntity().remove();
+	// 	    } else {
+	// 		ClaimedResidence res = Residence.getResidenceManager().getByLoc(event.getEntity().getLocation());
+	// 		if (res != null) {
+	// 		    event.setCancelled(true);
+	// 		    event.getEntity().remove();
+	// 		}
+	// 	    }
+	// 	} else {
+	// 	    event.setCancelled(true);
+	// 	    event.getEntity().remove();
+	// 	}
+	//     }
+	//     break;
+	// case PRIMED_TNT:
+	// case MINECART_TNT:
+	//     if (!perms.has("tnt", perms.has("explode", true))) {
+	// 	if (Residence.getConfigManager().isTNTExplodeBelow()) {
+	// 	    if (event.getEntity().getLocation().getBlockY() >= Residence.getConfigManager().getTNTExplodeBelowLevel()) {
+	// 		event.setCancelled(true);
+	// 		event.getEntity().remove();
+	// 	    } else {
+	// 		ClaimedResidence res = Residence.getResidenceManager().getByLoc(event.getEntity().getLocation());
+	// 		if (res != null) {
+	// 		    event.setCancelled(true);
+	// 		    event.getEntity().remove();
+	// 		}
+	// 	    }
+	// 	} else {
+	// 	    event.setCancelled(true);
+	// 	    event.getEntity().remove();
+	// 	}
+	//     }
+	//     break;
+	// case SMALL_FIREBALL:
+	// case FIREBALL:
+	//     if (!perms.has("fireball", perms.has("explode", true))) {
+	// 	event.setCancelled(true);
+	// 	event.getEntity().remove();
+	//     }
+	//     break;
+	// case WITHER_SKULL:
+	//     if (!perms.has("witherdamage", perms.has("damage", true))) {
+	// 	event.setCancelled(true);
+	// 	event.getEntity().remove();
+	//     }
+	//     break;
+	// default:
+	//     break;
+	// }
+ //    }
 
-    @SuppressWarnings("incomplete-switch")
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onEntityExplode(EntityExplodeEvent event) {
-	// disabling event on world
-	if (Residence.isDisabledWorldListener(event.getEntity().getWorld()))
-	    return;
-	if (event.isCancelled() || event.getEntity() == null)
-	    return;
-	Boolean cancel = false;
-	EntityType entity = event.getEntityType();
-	FlagPermissions perms = Residence.getPermsByLoc(event.getEntity().getLocation());
-	FlagPermissions world = Residence.getWorldFlags().getPerms(event.getEntity().getWorld().getName());
+ //    @SuppressWarnings("incomplete-switch")
+ //    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+ //    public void onEntityExplode(EntityExplodeEvent event) {
+	// // disabling event on world
+	// if (Residence.isDisabledWorldListener(event.getEntity().getWorld()))
+	//     return;
+	// if (event.isCancelled() || event.getEntity() == null)
+	//     return;
+	// Boolean cancel = false;
+	// EntityType entity = event.getEntityType();
+	// FlagPermissions perms = Residence.getPermsByLoc(event.getEntity().getLocation());
+	// FlagPermissions world = Residence.getWorldFlags().getPerms(event.getEntity().getWorld().getName());
 
-	switch (entity) {
-	case CREEPER:
-	    if (!perms.has("creeper", perms.has("explode", true)))
-		if (Residence.getConfigManager().isCreeperExplodeBelow()) {
-		    if (event.getEntity().getLocation().getBlockY() >= Residence.getConfigManager().getCreeperExplodeBelowLevel())
-			cancel = true;
-		    else {
-			ClaimedResidence res = Residence.getResidenceManager().getByLoc(event.getEntity().getLocation());
-			if (res != null)
-			    cancel = true;
-		    }
-		} else
-		    cancel = true;
-	    break;
-	case PRIMED_TNT:
-	case MINECART_TNT:
-	    if (!perms.has("tnt", perms.has("explode", true))) {
-		if (Residence.getConfigManager().isTNTExplodeBelow()) {
-		    if (event.getEntity().getLocation().getBlockY() >= Residence.getConfigManager().getTNTExplodeBelowLevel())
-			cancel = true;
-		    else {
-			ClaimedResidence res = Residence.getResidenceManager().getByLoc(event.getEntity().getLocation());
-			if (res != null)
-			    cancel = true;
-		    }
-		} else
-		    cancel = true;
-	    }
-	    break;
-	case SMALL_FIREBALL:
-	case FIREBALL:
-	    if (!perms.has("fireball", perms.has("explode", true)))
-		cancel = true;
-	    break;
-	case WITHER_SKULL:
-	case WITHER:
-	    if (!perms.has("wither", perms.has("explode", world.has("wither", world.has("explode", true)))))
-		cancel = true;
-	    break;
-	}
+	// switch (entity) {
+	// case CREEPER:
+	//     if (!perms.has("creeper", perms.has("explode", true)))
+	// 	if (Residence.getConfigManager().isCreeperExplodeBelow()) {
+	// 	    if (event.getEntity().getLocation().getBlockY() >= Residence.getConfigManager().getCreeperExplodeBelowLevel())
+	// 		cancel = true;
+	// 	    else {
+	// 		ClaimedResidence res = Residence.getResidenceManager().getByLoc(event.getEntity().getLocation());
+	// 		if (res != null)
+	// 		    cancel = true;
+	// 	    }
+	// 	} else
+	// 	    cancel = true;
+	//     break;
+	// case PRIMED_TNT:
+	// case MINECART_TNT:
+	//     if (!perms.has("tnt", perms.has("explode", true))) {
+	// 	if (Residence.getConfigManager().isTNTExplodeBelow()) {
+	// 	    if (event.getEntity().getLocation().getBlockY() >= Residence.getConfigManager().getTNTExplodeBelowLevel())
+	// 		cancel = true;
+	// 	    else {
+	// 		ClaimedResidence res = Residence.getResidenceManager().getByLoc(event.getEntity().getLocation());
+	// 		if (res != null)
+	// 		    cancel = true;
+	// 	    }
+	// 	} else
+	// 	    cancel = true;
+	//     }
+	//     break;
+	// case SMALL_FIREBALL:
+	// case FIREBALL:
+	//     if (!perms.has("fireball", perms.has("explode", true)))
+	// 	cancel = true;
+	//     break;
+	// case WITHER_SKULL:
+	// case WITHER:
+	//     if (!perms.has("wither", perms.has("explode", world.has("wither", world.has("explode", true)))))
+	// 	cancel = true;
+	//     break;
+	// }
 
-	if (cancel) {
-	    event.setCancelled(true);
-	    event.getEntity().remove();
-	    return;
-	}
+	// if (cancel) {
+	//     event.setCancelled(true);
+	//     event.getEntity().remove();
+	//     return;
+	// }
 
-	List<Block> preserve = new ArrayList<Block>();
-	for (Block block : event.blockList()) {
-	    FlagPermissions blockperms = Residence.getPermsByLoc(block.getLocation());
+	// List<Block> preserve = new ArrayList<Block>();
+	// for (Block block : event.blockList()) {
+	//     FlagPermissions blockperms = Residence.getPermsByLoc(block.getLocation());
 
-	    switch (entity) {
-	    case CREEPER:
-		if (!blockperms.has("creeper", blockperms.has("explode", true)))
-		    if (Residence.getConfigManager().isCreeperExplodeBelow()) {
-			if (block.getY() >= Residence.getConfigManager().getCreeperExplodeBelowLevel())
-			    preserve.add(block);
-			else {
-			    ClaimedResidence res = Residence.getResidenceManager().getByLoc(block.getLocation());
-			    if (res != null)
-				preserve.add(block);
-			}
-		    } else
-			preserve.add(block);
-		continue;
-	    case PRIMED_TNT:
-	    case MINECART_TNT:
-		if (!blockperms.has("tnt", blockperms.has("explode", true))) {
-		    if (Residence.getConfigManager().isTNTExplodeBelow()) {
-			if (block.getY() >= Residence.getConfigManager().getTNTExplodeBelowLevel())
-			    preserve.add(block);
-			else {
-			    ClaimedResidence res = Residence.getResidenceManager().getByLoc(block.getLocation());
-			    if (res != null)
-				preserve.add(block);
-			}
-		    } else
-			preserve.add(block);
-		}
-		continue;
-	    case ENDER_DRAGON:
-		if (!blockperms.has("dragongrief", false))
-		    preserve.add(block);
-		break;
-	    case ENDER_CRYSTAL:
-		if (!blockperms.has("explode", false))
-		    preserve.add(block);
-		continue;
-	    case SMALL_FIREBALL:
-	    case FIREBALL:
-		if (!blockperms.has("fireball", blockperms.has("explode", true)))
-		    preserve.add(block);
-		continue;
-	    case WITHER_SKULL:
-	    case WITHER:
-		if (!blockperms.has("wither", blockperms.has("explode", world.has("wither", world.has("explode", true)))))
-		    preserve.add(block);
-		continue;
-	    }
-	}
-	for (Block block : preserve) {
-	    event.blockList().remove(block);
-	}
+	//     switch (entity) {
+	//     case CREEPER:
+	// 	if (!blockperms.has("creeper", blockperms.has("explode", true)))
+	// 	    if (Residence.getConfigManager().isCreeperExplodeBelow()) {
+	// 		if (block.getY() >= Residence.getConfigManager().getCreeperExplodeBelowLevel())
+	// 		    preserve.add(block);
+	// 		else {
+	// 		    ClaimedResidence res = Residence.getResidenceManager().getByLoc(block.getLocation());
+	// 		    if (res != null)
+	// 			preserve.add(block);
+	// 		}
+	// 	    } else
+	// 		preserve.add(block);
+	// 	continue;
+	//     case PRIMED_TNT:
+	//     case MINECART_TNT:
+	// 	if (!blockperms.has("tnt", blockperms.has("explode", true))) {
+	// 	    if (Residence.getConfigManager().isTNTExplodeBelow()) {
+	// 		if (block.getY() >= Residence.getConfigManager().getTNTExplodeBelowLevel())
+	// 		    preserve.add(block);
+	// 		else {
+	// 		    ClaimedResidence res = Residence.getResidenceManager().getByLoc(block.getLocation());
+	// 		    if (res != null)
+	// 			preserve.add(block);
+	// 		}
+	// 	    } else
+	// 		preserve.add(block);
+	// 	}
+	// 	continue;
+	//     case ENDER_DRAGON:
+	// 	if (!blockperms.has("dragongrief", false))
+	// 	    preserve.add(block);
+	// 	break;
+	//     case ENDER_CRYSTAL:
+	// 	if (!blockperms.has("explode", false))
+	// 	    preserve.add(block);
+	// 	continue;
+	//     case SMALL_FIREBALL:
+	//     case FIREBALL:
+	// 	if (!blockperms.has("fireball", blockperms.has("explode", true)))
+	// 	    preserve.add(block);
+	// 	continue;
+	//     case WITHER_SKULL:
+	//     case WITHER:
+	// 	if (!blockperms.has("wither", blockperms.has("explode", world.has("wither", world.has("explode", true)))))
+	// 	    preserve.add(block);
+	// 	continue;
+	//     }
+	// }
+	// for (Block block : preserve) {
+	//     event.blockList().remove(block);
+	// }
 
-    }
+ //    }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onLingeringPotionLaunch(ProjectileLaunchEvent event) {
