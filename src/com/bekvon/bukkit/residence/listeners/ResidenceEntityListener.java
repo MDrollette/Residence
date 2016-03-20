@@ -81,28 +81,28 @@ public class ResidenceEntityListener implements Listener {
 	}
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onEntityInteract(EntityInteractEvent event) {
-	// disabling event on world
-	if (Residence.isDisabledWorldListener(event.getBlock().getWorld()))
-	    return;
-	Block block = event.getBlock();
-	Material mat = block.getType();
-	Entity entity = event.getEntity();
-	FlagPermissions perms = Residence.getPermsByLoc(block.getLocation());
-	boolean hastrample = perms.has("trample", perms.has("hasbuild", true));
-	if (!hastrample && !(entity.getType() == EntityType.FALLING_BLOCK) && (mat == Material.SOIL || mat == Material.SOUL_SAND)) {
-	    event.setCancelled(true);
-	}
-    }
+ //    @EventHandler(priority = EventPriority.LOWEST)
+ //    public void onEntityInteract(EntityInteractEvent event) {
+	// // disabling event on world
+	// if (Residence.isDisabledWorldListener(event.getBlock().getWorld()))
+	//     return;
+	// Block block = event.getBlock();
+	// Material mat = block.getType();
+	// Entity entity = event.getEntity();
+	// FlagPermissions perms = Residence.getPermsByLoc(block.getLocation());
+	// boolean hastrample = perms.has("trample", perms.has("hasbuild", true));
+	// if (!hastrample && !(entity.getType() == EntityType.FALLING_BLOCK) && (mat == Material.SOIL || mat == Material.SOUL_SAND)) {
+	//     event.setCancelled(true);
+	// }
+ //    }
 
-    public static boolean isMonster(Entity ent) {
-	return (ent instanceof Monster || ent instanceof Slime || ent instanceof Ghast);
-    }
+ //    public static boolean isMonster(Entity ent) {
+	// return (ent instanceof Monster || ent instanceof Slime || ent instanceof Ghast);
+ //    }
 
-    private boolean isTamed(Entity ent) {
-	return (ent instanceof Tameable ? ((Tameable) ent).isTamed() : false);
-    }
+ //    private boolean isTamed(Entity ent) {
+	// return (ent instanceof Tameable ? ((Tameable) ent).isTamed() : false);
+ //    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void AnimalKilling(EntityDamageByEntityEvent event) {
