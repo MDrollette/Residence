@@ -96,13 +96,13 @@ public class ResidenceEntityListener implements Listener {
 	// }
  //    }
 
- //    public static boolean isMonster(Entity ent) {
-	// return (ent instanceof Monster || ent instanceof Slime || ent instanceof Ghast);
- //    }
+    public static boolean isMonster(Entity ent) {
+	return (ent instanceof Monster || ent instanceof Slime || ent instanceof Ghast);
+    }
 
- //    private boolean isTamed(Entity ent) {
-	// return (ent instanceof Tameable ? ((Tameable) ent).isTamed() : false);
- //    }
+    private boolean isTamed(Entity ent) {
+	return (ent instanceof Tameable ? ((Tameable) ent).isTamed() : false);
+    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void AnimalKilling(EntityDamageByEntityEvent event) {
