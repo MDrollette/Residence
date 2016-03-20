@@ -274,71 +274,71 @@ public class ResidenceBlockListener implements Listener {
 	}
     }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onBlockPistonRetract(BlockPistonRetractEvent event) {
-	// disabling event on world
-	if (Residence.isDisabledWorldListener(event.getBlock().getWorld()))
-	    return;
-	FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
-	if (!perms.has("piston", true)) {
-	    event.setCancelled(true);
-	    return;
-	}
+ //    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+ //    public void onBlockPistonRetract(BlockPistonRetractEvent event) {
+	// // disabling event on world
+	// if (Residence.isDisabledWorldListener(event.getBlock().getWorld()))
+	//     return;
+	// FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
+	// if (!perms.has("piston", true)) {
+	//     event.setCancelled(true);
+	//     return;
+	// }
 
-	List<Block> blocks = Residence.getNms().getPistonRetractBlocks(event);
+	// List<Block> blocks = Residence.getNms().getPistonRetractBlocks(event);
 
-	if (event.isSticky()) {
-	    for (Block oneBlock : blocks) {
-		FlagPermissions blockperms = Residence.getPermsByLoc(oneBlock.getLocation());
-		if (!blockperms.has("piston", true)) {
-		    event.setCancelled(true);
-		    return;
-		}
-	    }
+	// if (event.isSticky()) {
+	//     for (Block oneBlock : blocks) {
+	// 	FlagPermissions blockperms = Residence.getPermsByLoc(oneBlock.getLocation());
+	// 	if (!blockperms.has("piston", true)) {
+	// 	    event.setCancelled(true);
+	// 	    return;
+	// 	}
+	//     }
 
-	    for (Block block : blocks) {
-		ClaimedResidence blockRes = Residence.getResidenceManager().getByLoc(block.getLocation());
-		ClaimedResidence pistonRes = Residence.getResidenceManager().getByLoc(event.getBlock().getLocation());
-		if (blockRes == null && pistonRes != null || blockRes != null && pistonRes == null || blockRes != null && pistonRes != null && !blockRes.getName()
-		    .equalsIgnoreCase(pistonRes.getName())) {
-		    event.setCancelled(true);
-		    return;
-		}
-	    }
-	}
+	//     for (Block block : blocks) {
+	// 	ClaimedResidence blockRes = Residence.getResidenceManager().getByLoc(block.getLocation());
+	// 	ClaimedResidence pistonRes = Residence.getResidenceManager().getByLoc(event.getBlock().getLocation());
+	// 	if (blockRes == null && pistonRes != null || blockRes != null && pistonRes == null || blockRes != null && pistonRes != null && !blockRes.getName()
+	// 	    .equalsIgnoreCase(pistonRes.getName())) {
+	// 	    event.setCancelled(true);
+	// 	    return;
+	// 	}
+	//     }
+	// }
 
-    }
+ //    }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onBlockPistonExtend(BlockPistonExtendEvent event) {
-	// disabling event on world
-	if (Residence.isDisabledWorldListener(event.getBlock().getWorld()))
-	    return;
-	FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
-	if (!perms.has("piston", true)) {
-	    event.setCancelled(true);
-	}
-	for (Block block : event.getBlocks()) {
-	    FlagPermissions blockpermsfrom = Residence.getPermsByLoc(block.getLocation());
-	    if (!blockpermsfrom.has("piston", true)) {
-		event.setCancelled(true);
-		return;
-	    }
-	}
+ //    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+ //    public void onBlockPistonExtend(BlockPistonExtendEvent event) {
+	// // disabling event on world
+	// if (Residence.isDisabledWorldListener(event.getBlock().getWorld()))
+	//     return;
+	// FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
+	// if (!perms.has("piston", true)) {
+	//     event.setCancelled(true);
+	// }
+	// for (Block block : event.getBlocks()) {
+	//     FlagPermissions blockpermsfrom = Residence.getPermsByLoc(block.getLocation());
+	//     if (!blockpermsfrom.has("piston", true)) {
+	// 	event.setCancelled(true);
+	// 	return;
+	//     }
+	// }
 
-	BlockFace dir = event.getDirection();
-	for (Block block : event.getBlocks()) {
-	    Location loc = new Location(block.getWorld(), block.getX() + dir.getModX(), block.getY() + dir.getModY(), block.getZ() + dir.getModZ());
-	    ClaimedResidence blockRes = Residence.getResidenceManager().getByLoc(loc);
-	    ClaimedResidence pistonRes = Residence.getResidenceManager().getByLoc(event.getBlock().getLocation());
-	    if (blockRes == null && pistonRes != null || blockRes != null && pistonRes == null || blockRes != null && pistonRes != null && !blockRes.getName()
-		.equalsIgnoreCase(pistonRes.getName())) {
-		event.setCancelled(true);
-		return;
-	    }
-	}
+	// BlockFace dir = event.getDirection();
+	// for (Block block : event.getBlocks()) {
+	//     Location loc = new Location(block.getWorld(), block.getX() + dir.getModX(), block.getY() + dir.getModY(), block.getZ() + dir.getModZ());
+	//     ClaimedResidence blockRes = Residence.getResidenceManager().getByLoc(loc);
+	//     ClaimedResidence pistonRes = Residence.getResidenceManager().getByLoc(event.getBlock().getLocation());
+	//     if (blockRes == null && pistonRes != null || blockRes != null && pistonRes == null || blockRes != null && pistonRes != null && !blockRes.getName()
+	// 	.equalsIgnoreCase(pistonRes.getName())) {
+	// 	event.setCancelled(true);
+	// 	return;
+	//     }
+	// }
 
-    }
+ //    }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onBlockFromTo(BlockFromToEvent event) {
