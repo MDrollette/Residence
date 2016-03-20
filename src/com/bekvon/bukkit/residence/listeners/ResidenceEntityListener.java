@@ -54,18 +54,18 @@ import org.bukkit.projectiles.ProjectileSource;
 
 public class ResidenceEntityListener implements Listener {
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onEndermanChangeBlock(EntityChangeBlockEvent event) {
-	// disabling event on world
-	if (Residence.isDisabledWorldListener(event.getBlock().getWorld()))
-	    return;
-	if (event.getEntityType() != EntityType.ENDERMAN)
-	    return;
-	FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
-	if (!perms.has("build", true)) {
-	    event.setCancelled(true);
-	}
-    }
+ //    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+ //    public void onEndermanChangeBlock(EntityChangeBlockEvent event) {
+	// // disabling event on world
+	// if (Residence.isDisabledWorldListener(event.getBlock().getWorld()))
+	//     return;
+	// if (event.getEntityType() != EntityType.ENDERMAN)
+	//     return;
+	// FlagPermissions perms = Residence.getPermsByLoc(event.getBlock().getLocation());
+	// if (!perms.has("build", true)) {
+	//     event.setCancelled(true);
+	// }
+ //    }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onWitherChangeBlock(EntityChangeBlockEvent event) {
