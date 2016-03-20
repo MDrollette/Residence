@@ -90,6 +90,5 @@
 	<target name="clean" description="Clean up project">
 		<echo>Cleaning up</echo>
 		<delete dir="build" />
-		<delete dir="lib" />
 	</target>
 </project>
